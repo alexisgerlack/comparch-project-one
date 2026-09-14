@@ -1,4 +1,4 @@
-filename = mini_project
+filename = mini-project
 pcf_file = ../common/iceBlinkPico.pcf
 
 build:
