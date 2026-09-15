@@ -1,7 +1,9 @@
 module top(RGB_B,RGB_G,RGB_R, input clk);
     output logic  RGB_B, RGB_R, RGB_G;
-    parameter PWM_INTERVAL = 1200000;
+    // because the clock ticks at 12MHz we need to have out interval be every 12 million clock ticks
+    parameter INTERVAL = 12000000;
     int current_index = 0;
+    int counter = 0;
 
     logic color_one[6][3] = '{
         '{1'b1,1'b0,1'b0}, //creating red by assigning red to 1 green to 0 and blue to 0
@@ -12,10 +14,18 @@ module top(RGB_B,RGB_G,RGB_R, input clk);
         '{1'b1,1'b0,1'b1}};//creating magenta by assigning red to 1 green to 0 and blue to 1
 
     always@(posedge clk) begin
-        RGB_R <= color_one[current_index][0];
-        RGB_G <= color_one[current_index][1];
-        RGB_B <= color_one[current_index][2];
-        current_index <= (current_index +1) % 6;
+        if (counter == INTERVAL) begin
+            RGB_R <= color_one[current_index][0];
+            RGB_G <= color_one[current_index][1];
+            RGB_B <= color_one[current_index][2];
+            counter <=0;
+            if (current_index == 5)
+                current_index <= 0;
+            else
+                current_index <= current_index + 1;
+        end
+        else
+            counter <= counter +1;
     end
 
 endmodule
