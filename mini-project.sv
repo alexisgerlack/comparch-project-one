@@ -6,12 +6,12 @@ module top(RGB_B,RGB_G,RGB_R, input clk);
     int counter = 0;
 
     logic color_one[6][3] = '{
-        '{1'b1,1'b0,1'b0}, //creating red by assigning red to 1 green to 0 and blue to 0
-        '{1'b0,1'b1,1'b0},//creating yellow by assigning red to 1 green to 1 and blue to 0
-        '{1'b0,1'b1,1'b0},//creating green by assigning red to 0 green to 1 and blue to 0
-        '{1'b0,1'b1,1'b1},//creating cyan by assigning red to 0 green to 1 and blue to 1
-        '{1'b0,1'b0,1'b1},//creating blue by assigning red to 0 green to 0 and blue to 1
-        '{1'b1,1'b0,1'b1}};//creating magenta by assigning red to 1 green to 0 and blue to 1
+        '{1'b0,1'b1,1'b1}, //creating red by assigning red-on green-off and blue-off
+        '{1'b0,1'b0,1'b1},//creating yellow by assigning red-on green-on and blue-off
+        '{1'b1,1'b0,1'b1},//creating green by assigning red-off green-on and blue-off
+        '{1'b1,1'b0,1'b0},//creating cyan by assigning red-off greenv and blue-on
+        '{1'b1,1'b1,1'b0},//creating blue by assigning red-off green-off and blue-on
+        '{1'b0,1'b1,1'b0}};//creating magenta by assigning red-on green-off and blue-on
 
     always@(posedge clk) begin
         if (counter == INTERVAL) begin
