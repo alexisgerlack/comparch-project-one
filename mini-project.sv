@@ -16,7 +16,7 @@ module top(RGB_B,RGB_G,RGB_R, input clk);
         '{1'b0,1'b1,1'b0}};//creating magenta by assigning red-on green-off and blue-on
     //clock loop that only activates when the clock ticks 12 million times.
     //otherwise it adds one to the counter
-    always@(posedge clk) begin
+    always_ff@(posedge clk) begin
         if (counter == INTERVAL) begin
             RGB_R <= color_one[current_index][0];
             RGB_G <= color_one[current_index][1];
